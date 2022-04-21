@@ -1,0 +1,132 @@
+% beamerthemeUCBerkeley.sty v1.0 (March 17, 2017)
+% by Overleaf (LianTze Lim, Ryan Looney)
+\ProvidesPackage{beamerthemeUWOshkosh}
+
+\RequirePackage{silence}
+\WarningsOff[mathdesign/mdbch]
+
+\RequirePackage{etoolbox}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+
+% \RequirePackage[T1]{fontenc}
+% \RequirePackage[charter,expert]{mathdesign}
+% \RequirePackage[scaled=.96,oldstyle]{XCharter}
+% \RequirePackage[default,scale=0.96,osfigures]{opensans}
+\RequirePackage{fontspec}
+\setromanfont[Ligatures={TeX,Common}]{Georgia}
+
+\IfFileExists{fonts/OpenSans-Regular.ttf}
+{\setsansfont[Ligatures={TeX,Common},
+  Scale=0.90,
+  Path=fonts/,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic
+  ]{OpenSans}}
+{\setsansfont[Ligatures={TeX,Common}]{Verdana}}
+
+\RequirePackage{tikz}
+
+\definecolor{Gold}{RGB}{1,1,1}
+\definecolor{UWOYellow}{RGB}{100,129,40}
+\definecolor{TableGold}{RGB}{222,157,46}
+\definecolor{TableBlue1}{RGB}{207,226,234}
+\definecolor{TableBlue2}{RGB}{232,241,245}
+
+\setbeamertemplate{title page}[default][left]
+\setbeamerfont{title}{family=\rmfamily,size=\Huge}
+\setbeamerfont{author}{size=\Large}
+
+\setbeamersize{text margin left=2em, text margin right=2em}
+
+\setbeamertemplate{frametitle}{\vskip0.2\paperheight\insertframetitle} 
+\setbeamerfont{frametitle}{family=\rmfamily,series=\mdseries,size=\LARGE}
+\setbeamerfont{block title}{family=\rmfamily,size=\large}
+\setbeamercolor{titlelike}{fg=Gold}
+\setbeamercolor{normal text}{fg=Gold}
+\setbeamercolor{structure}{fg=Gold}
+\setbeamercolor{block title}{fg=Gold}
+
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamertemplate{itemize subsubitem}{\textbullet}
+\setlength{\leftmargini}{1.25em}
+\setlength{\leftmarginii}{1em}
+\setlength{\leftmarginiii}{1em}
+
+\pgfdeclareimage[width=\paperwidth]{UWO}{UWO}
+\pgfdeclareimage[width=0.2\paperwidth]{logo}{cornershop_logo}
+
+\setbeamertemplate{background}{%
+\begin{tikzpicture}[overlay,remember picture]
+\node[anchor=south west,inner sep=0pt,draw=none,yshift=-6pt] at (current page.south west) {\pgfuseimage{UWO}};%
+\node[anchor=south west,inner sep=0pt,draw=none,xshift=0.05\paperwidth,yshift=0.04\paperheight] at (current page.south west) {\pgfuseimage{logo}};%
+\end{tikzpicture}%
+}
+
+\setbeamertemplate{footline}{%
+\vskip0.15\paperheight
+}
+
+\newcommand{\smallframetitle}{%
+  \setbeamertemplate{frametitle}{\vskip0.15\paperheight\insertframetitle}
+  \setbeamerfont{frametitle}{size=\large,series=\bfseries}
+}
+\newcommand{\normalframetitle}{%
+  \setbeamertemplate{frametitle}{\vskip0.2\paperheight\insertframetitle} 
+  \setbeamerfont{frametitle}{size=\LARGE,series=\mdseries}
+}
+
+\renewcommand{\arraystretch}{1.2}
+\newcommand{\tableheadrow}{\rowcolor{TableGold}}
+\newcommand{\tableheadcol}[1]{{\bfseries\color{white}#1}}
+\rowcolors{2}{TableBlue1}{TableBlue2}
+\AtBeginEnvironment{tabular}{\color{black}}
+
+\addtobeamertemplate{navigation symbols}{}{
+    \usebeamerfont{frametitle}
+    \usebeamercolor[fg]{frametitle}
+    \insertframenumber/\inserttotalframenumber
+    \hspace{1pt}
+    \vspace{-40pt}
+}
+\usepackage{ragged2e}
+\apptocmd{\frame}{}{\justifying}{}
+
+\usepackage{color}
+
+
+\usepackage[dvipsnames]{xcolor}
+\usepackage{listings}
+\lstset{
+  basicstyle=\fontsize{6}{10}\selectfont\ttfamily
+}
+\lstdefinelanguage{Kotlin}{
+  comment=[l]{//},
+  commentstyle={\color{gray}\ttfamily},
+  emph={filter, first, firstOrNull, forEach, lazy, map, mapNotNull, println},
+  emphstyle={\color{OrangeRed}},
+  identifierstyle=\color{black},
+  keywords={!in, !is, abstract, actual, annotation, as, as?, break, by, catch, class, companion, const, constructor, continue, crossinline, data, delegate, do, dynamic, else, enum, expect, external, false, field, file, final, finally, for, fun, get, if, import, in, infix, init, inline, inner, interface, internal, is, lateinit, noinline, null, object, open, operator, out, override, package, param, private, property, protected, public, receiveris, reified, return, return@, sealed, set, setparam, super, suspend, tailrec, this, throw, true, try, typealias, typeof, val, var, vararg, when, where, while, implementation},
+  keywordstyle={\color{NavyBlue}\bfseries},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+  morestring=[s]{"""*}{*"""},
+  ndkeywords={@Deprecated, @JvmField, @JvmName, @JvmOverloads, @JvmStatic, @JvmSynthetic, Array, Byte, Double, Float, Int, Integer, Iterable, Long, Runnable, Short, String, Any, Unit, Nothing},
+  ndkeywordstyle={\color{BurntOrange}\bfseries},
+  sensitive=true,
+  stringstyle={\color{ForestGreen}\ttfamily},
+}
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{white}{\parbox{\textwidth}{#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\hypersetup{citecolor=blue}
+\hypersetup{urlcolor=blue}
+\hypersetup{pdfauthor=author}
